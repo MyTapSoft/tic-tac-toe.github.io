@@ -20,14 +20,6 @@ function checkEnd() {
   if (t[0] && t[1] && t[2] && t[3] && t[4] && t[5] && t[6] && t[7] && t[8]) return true;
 }
 
-function move(id, role) {
-  if (t[id]) return false;
-  t[id] = role;
-  document.getElementById(id).className = 'cell ' + role;
-  moveleft(id);
-  !checkEnd() ? (role == 'player') ? ai() : null : reset()
-}
-
 function moveLeft(id) {
   var moveLeft = new Array(freeCellsToAiMove.length - 1);
 
@@ -38,6 +30,16 @@ function moveLeft(id) {
   }
   freeCellsToAiMove = moveLeft;
 }
+
+function move(id, role) {
+  if (t[id]) return false;
+  t[id] = role;
+  document.getElementById(id).className = 'cell ' + role;
+  moveLeft(id);
+  !checkEnd() ? (role == 'player') ? ai() : null : reset()
+}
+
+
 
 function reset() {
   alert("Игра окончена!");
